@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+  labels:
+    app: test-app
+spec:
+  replicas: 2 #The number of pods to be created in the 
+   #Kubernetes cluster for the React.js application container
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: test-app #The name of the react.js application container
+        #The Docker image for building the React.js application container
+        image: hoaithuong/test-app
+        ports:
+        - containerPort: 80
