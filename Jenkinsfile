@@ -29,13 +29,15 @@ pipeline {
         }
       }
     }
-    stage('Deploying container to Kubernetes') {
+    stage('Deploy App on k8s') {
       steps {
-        script {
-          kubernetesDeploy(configs: "deployment.yaml", 
-                                         "service.yaml")
+        withCredentials([
+            string(credentialsId: 'my_kubernetes', variable: 'api_token')
+            ]) {
+             sh 'kubectl --token $api_token --server https://9573-42-119-230-152.ngrok-free.app  --insecure-skip-tls-verify=true apply -f deployment.yaml service.yaml'
+               }
+            }
+}
         }
-      }
-    }
   }
 }
