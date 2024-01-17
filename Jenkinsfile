@@ -37,7 +37,6 @@ pipeline {
              sh 'kubectl --token $api_token --server https://9573-42-119-230-152.ngrok-free.app  --insecure-skip-tls-verify=true apply -f deployment.yaml service.yaml'
                }
             }
-}
         }
   }
 }
