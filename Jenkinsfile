@@ -2,6 +2,7 @@ pipeline {
   environment {
     dockerimagename = "hoaithuongdata/test-app"
     dockerImage = ""
+    urlK8s = "https://5ede-1-55-81-251.ngrok-free.app/" // for test remote k8s cluster
   }
   agent any
   stages {
@@ -34,7 +35,8 @@ pipeline {
         withCredentials([
             string(credentialsId: 'my_kubernetes', variable: 'api_token')
             ]) {
-             sh 'kubectl --token $api_token --server https://9573-42-119-230-152.ngrok-free.app  --insecure-skip-tls-verify=true apply -f deployment.yaml service.yaml'
+             sh 'kubectl --token $api_token --server  ${urlK8s} --insecure-skip-tls-verify=true apply -f deployment.yaml'
+             sh 'kubectl --token $api_token --server ${urlK8s} --insecure-skip-tls-verify=true apply -f service.yaml'
                }
             }
         }
