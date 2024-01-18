@@ -2,7 +2,7 @@ pipeline {
   environment {
     dockerimagename = "hoaithuongdata/test-app"
     dockerImage = ""
-    scannerHome = tool 'SonarScanner';
+    
     urlK8s = "https://5ede-1-55-81-251.ngrok-free.app/" // for test remote k8s cluster
   }
   agent any
@@ -15,9 +15,11 @@ pipeline {
 
     stage('SonarQube Analysis') {
       steps {
-
-        withSonarQubeEnv(installationName= 'sonarqube') {
-          sh "${scannerHome}/bin/sonar-scanner"
+        script {
+          def scannerHome = tool 'SonarQube Scanner';
+          withSonarQubeEnv(installationName= 'sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+          }
         }
       }
     }
