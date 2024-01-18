@@ -3,7 +3,7 @@ kind: Service
 metadata:
   #The name of the Kubernetes Service to be created 
   #in the Kubernetes cluster
-  name: service 
+  name: test-service 
 spec:
   selector:
     app: test-app 
