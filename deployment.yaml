@@ -18,6 +18,6 @@ spec:
       containers:
       - name: test-app #The name of the react.js application container
         #The Docker image for building the React.js application container
-        image: hoaithuong/test-app
+        image: hoaithuongdata/test-app:latest
         ports:
         - containerPort: 80
