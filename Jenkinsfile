@@ -35,6 +35,8 @@ pipeline {
         withCredentials([
             string(credentialsId: 'my_kubernetes_serect', variable: 'api_token')
             ]) {
+                          
+             sh 'kubectl --token $api_token --server  ${urlK8s} --insecure-skip-tls-verify=true delete  deployment test-app'
              sh 'kubectl --token $api_token --server  ${urlK8s} --insecure-skip-tls-verify=true apply -f deployment.yaml'
              sh 'kubectl --token $api_token --server ${urlK8s} --insecure-skip-tls-verify=true apply -f service.yaml'
                }
