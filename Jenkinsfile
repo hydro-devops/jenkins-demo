@@ -11,6 +11,14 @@ pipeline {
         git 'https://github.com/hydro-devops/jenkins-demo.git'
       }
     }
+
+    stage('SonarQube Analysis') {
+        def scannerHome = tool 'SonarScanner';
+        withSonarQubeEnv() {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+      }
+
     stage('Build image') {
       steps{
         script {
